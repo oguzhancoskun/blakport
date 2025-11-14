@@ -3,6 +3,9 @@ name: Publish Python Package to PyPI
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - 'v*'  # Trigger on tags starting with 'v'
   workflow_dispatch:
 
 permissions:
@@ -16,6 +19,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history and tags
 
       - name: Set up Python
         uses: actions/setup-python@v5
